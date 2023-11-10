@@ -1,20 +1,20 @@
 import Link from 'next/link'
 import React from 'react'
-import { UserButton } from "@clerk/nextjs";
 
-const Header = () => {
+const Header = async () => {
+
   return (
-    <header>
-      <nav>
-        <section>
-          Liga de tenis // pendiente nombre
-        </section>
-        <section>
-          <Link href='/'>Inicio</Link>
-          <Link href='/torneos'>Torneos</Link>
-          <UserButton afterSignOutUrl="/" />
-        </section>
-      </nav>
+    <header className='h-16 flex justify-between items-center'>
+      <section>
+        <Link href='/'>
+          <h1>Liga de tenis NJS</h1>
+        </Link>
+      </section>
+      <section className='flex justify-around items-center w-60'>
+        <Link href='/'>Inicio</Link>
+        <Link href='/torneos'>Torneos</Link>
+        <Link href='/login'>Login</Link>
+      </section>
     </header>
   )
 }
