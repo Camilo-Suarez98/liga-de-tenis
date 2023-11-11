@@ -4,7 +4,7 @@ import React from 'react'
 const Header = async () => {
 
   return (
-    <header className='h-16 flex justify-between items-center'>
+    <header className='h-16 flex justify-between items-center sm:px-6'>
       <section>
         <Link href='/'>
           <h1>Liga de tenis NJS</h1>
