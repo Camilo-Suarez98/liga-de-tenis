@@ -13,7 +13,7 @@ const Header = async () => {
       <section className='flex justify-evenly items-center w-60'>
         <Link href='/'>Inicio</Link>
         <Link href='/torneos'>Torneos</Link>
-        <Link href='/login'>Ingresar</Link>
+        <Link href='/ingresa'>Ingresar</Link>
       </section>
     </header>
   )
