@@ -1,10 +1,11 @@
 import React from 'react'
+import Link from 'next/link'
 
-const Login = () => {
+const Register = () => {
   return (
-    <div className='flex flex-col items-center mt-10'>
-      <h2 className='text-4xl'>Iniciar sesión</h2>
-      <form className='w-56'>
+    <div className='w-full flex flex-col items-center mt-10'>
+      <h2 className='text-4xl my-4'>Registro</h2>
+      <form className='w-56 border-2 border-blue-500 p-3 rounded-xl'>
         <section className='my-3 flex flex-col'>
           <label htmlFor="name">Nombre: </label>
           <input type="text" name="name" id="name" />
@@ -24,9 +25,19 @@ const Login = () => {
         <section className='my-3 flex flex-col'>
           <button type='submit'>Ingresar</button>
         </section>
+        <h3>
+          ¿Ya tienes cuenta?
+          {' '}
+          <Link
+            className='text-blue-500'
+            href='/ingresa'
+          >
+            Ingresa aquí
+          </Link>
+        </h3>
       </form>
     </div>
   )
 }
 
-export default Login
+export default Register

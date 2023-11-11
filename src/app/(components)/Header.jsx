@@ -10,7 +10,7 @@ const Header = async () => {
           <h1>Liga de tenis NJS</h1>
         </Link>
       </section>
-      <section className='flex justify-around items-center w-60'>
+      <section className='flex justify-evenly items-center w-60'>
         <Link href='/'>Inicio</Link>
         <Link href='/torneos'>Torneos</Link>
         <Link href='/login'>Ingresar</Link>
