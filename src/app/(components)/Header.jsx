@@ -9,7 +9,6 @@ const Header = () => {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   const router = useRouter()
   const isAdmin = Cookies.get('role')
-  console.log(isAdmin);
 
   const handleLogOut = () => {
     Cookies.remove('token')
@@ -31,11 +30,16 @@ const Header = () => {
         </Link>
       </section>
       <section className='flex justify-evenly items-center w-60'>
-        <Link href='/'>Inicio</Link>
-        <Link href='/torneos'>Torneos</Link>
+        <Link className='hover:text-blue-500 hover:font-bold' href='/'>Inicio</Link>
+        <Link
+          className='hover:text-blue-500 hover:font-bold'
+          href={!isAdmin ? '/torneos' : '/admin'}
+        >
+          Torneos
+        </Link>
         {!isLoggedIn ?
-          <Link href='/ingresa'>Ingresar</Link> :
-          <button onClick={handleLogOut}>Salir</button>
+          <Link className='hover:text-blue-500 hover:font-bold' href='/ingresa'>Ingresar</Link> :
+          <button className='hover:text-blue-500 hover:font-bold' onClick={handleLogOut}>Salir</button>
         }
       </section>
     </header>
