@@ -3,12 +3,12 @@ import Loader from '../(components)/Loader';
 import Link from 'next/link';
 
 async function getTournaments() {
-  const tournamentResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournament`)
-  return tournamentResponse.json()
-}
+  const tournamentResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournament`);
+  return tournamentResponse.json();
+};
 
 export default async function Tournament() {
-  const tournaments = await getTournaments()
+  const tournaments = await getTournaments();
 
   return (
     <div className='flex flex-col items-center justify-start'>
@@ -36,5 +36,5 @@ export default async function Tournament() {
         </div>
       </Suspense>
     </div>
-  )
-}
+  );
+};
