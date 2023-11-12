@@ -4,10 +4,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FcGoogle } from 'react-icons/fc'
 import Cookies from 'js-cookie'
+import { useAuth } from '../(utils)/AuthContext'
 
 const Login = () => {
-  const [userData, setUserData] = useState({})
-  const router = useRouter()
+  const [userData, setUserData] = useState({});
+  const [userError, setUserError] = useState(false)
+  const router = useRouter();
+  const { setIsLoggedIn } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -29,21 +32,27 @@ const Login = () => {
       }
     }
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/local/login`, fetchConfig)
-    const info = await response.json()
-    const { profile, token } = info
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/local/login`, fetchConfig)
+      const info = await response.json()
+      const { profile, token } = info
 
-    Cookies.set('token', token, { path: '' })
-    Cookies.set('isLoggedIn', 'true', { path: '/' })
-    Cookies.set('name', profile.name, { path: '' })
-    Cookies.set('lastName', profile.lastName, { path: '' })
-    Cookies.set('email', profile.email, { path: '' })
-    Cookies.set('role', profile.role, { path: '' });
+      Cookies.set('token', token, { path: '/' })
+      Cookies.set('isLoggedIn', 'true', { path: '/' })
+      Cookies.set('name', profile.name, { path: '/' })
+      Cookies.set('lastName', profile.lastName, { path: '/' })
+      Cookies.set('email', profile.email, { path: '/' })
+      Cookies.set('role', profile.role, { path: '/' });
 
-    if (!profile.role) {
-      router.push('/torneos')
-    } else {
-      router.push('/')
+      if (!profile.role) {
+        router.push('/torneos')
+      } else {
+        router.push('/admin')
+      }
+
+      setIsLoggedIn(true)
+    } catch (error) {
+      setUserError(true)
     }
   }
 
@@ -80,6 +89,7 @@ const Login = () => {
             onChange={handleChange}
             className='rounded-lg text-black p-1'
           />
+          {userError && <p className='text-red-500'>Usuario no existe</p>}
         </section>
         <section className='my-3 flex flex-col'>
           <button

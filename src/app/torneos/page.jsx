@@ -1,6 +1,4 @@
-'use client'
 import React from 'react'
-import authenticatedRoute from '../(components)/HOC/AuthenticatedRoute'
 
 const Tournament = () => {
   return (
@@ -8,4 +6,4 @@ const Tournament = () => {
   )
 }
 
-export default authenticatedRoute(Tournament, { pathAfterFailure: '/' })
+export default Tournament

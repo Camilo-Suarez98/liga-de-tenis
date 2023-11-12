@@ -33,14 +33,18 @@ const Register = () => {
     const info = await response.json()
     const { profile, token } = info
 
-    Cookies.set('token', token, { path: '' })
+    Cookies.set('token', token, { path: '/' })
     Cookies.set('isLoggedIn', 'true', { path: '/' })
-    Cookies.set('name', profile.name, { path: '' })
-    Cookies.set('lastName', profile.lastName, { path: '' })
-    Cookies.set('email', profile.email, { path: '' })
-    Cookies.set('role', profile.role, { path: '' });
+    Cookies.set('name', profile.name, { path: '/' })
+    Cookies.set('lastName', profile.lastName, { path: '/' })
+    Cookies.set('email', profile.email, { path: '/' })
+    Cookies.set('role', profile.role, { path: '/' });
 
-    router.push('/torneos')
+    if (!profile.role) {
+      router.push('/torneos')
+    } else {
+      router.push('/admin')
+    }
   }
 
   return (

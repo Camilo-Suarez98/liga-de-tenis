@@ -3,13 +3,13 @@ import Cookies from 'js-cookie';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import React from 'react'
-import { useJwt } from "react-jwt";
+import { useAuth } from '../(utils)/AuthContext';
 
 const Header = () => {
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
   const router = useRouter()
-  const token = Cookies.get('token')
-
-  const { isExpired } = useJwt(token)
+  const isAdmin = Cookies.get('role')
+  console.log(isAdmin);
 
   const handleLogOut = () => {
     Cookies.remove('token')
@@ -19,6 +19,7 @@ const Header = () => {
     Cookies.remove('email')
     Cookies.remove('role');
 
+    setIsLoggedIn(false)
     router.push('/')
   }
 
@@ -32,7 +33,7 @@ const Header = () => {
       <section className='flex justify-evenly items-center w-60'>
         <Link href='/'>Inicio</Link>
         <Link href='/torneos'>Torneos</Link>
-        {isExpired ?
+        {!isLoggedIn ?
           <Link href='/ingresa'>Ingresar</Link> :
           <button onClick={handleLogOut}>Salir</button>
         }
