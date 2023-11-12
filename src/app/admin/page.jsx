@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Link from 'next/link'
+import Loader from '../(components)/Loader'
 
 async function getUsers() {
   const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`)
@@ -22,11 +23,13 @@ export default async function Dashboard() {
       </Link> */}
       {/* table here */}
       <h2>Lista de usuarios</h2>
-      {res.data.map(user => {
-        return (
-          <div key={user._id}>{user.name}</div>
-        )
-      })}
+      <Suspense fallback={<Loader />}>
+        {res.data.map(user => {
+          return (
+            <div key={user._id}>{user.name}</div>
+          )
+        })}
+      </Suspense>
     </div>
   )
 }

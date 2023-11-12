@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Loading = () => {
+const Loader = () => {
   return (
     <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster">
       <div className="wheel"></div>
@@ -23,4 +23,4 @@ const Loading = () => {
   )
 }
 
-export default Loading
+export default Loader
