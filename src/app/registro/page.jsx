@@ -1,27 +1,28 @@
-"use client"
-import React, { useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { FcGoogle } from 'react-icons/fc'
-import { useAuth } from '../(utils)/AuthContext'
-import Cookies from 'js-cookie'
+"use client";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { FcGoogle } from 'react-icons/fc';
+import { useAuth } from '../(utils)/AuthContext';
+import Cookies from 'js-cookie';
 
 const Register = () => {
-  const [newUserData, setNewUserData] = useState({})
-  const router = useRouter()
+  const [newUserData, setNewUserData] = useState({});
+  const [errorData, setErrorData] = useState(false)
+  const router = useRouter();
   const { setIsLoggedIn } = useAuth();
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
     setNewUserData({
       ...newUserData,
       [name]: value
-    })
-  }
+    });
+  };
 
   const handleRegister = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const fetchConfig = {
       method: 'POST',
@@ -29,32 +30,31 @@ const Register = () => {
       headers: {
         'Content-Type': 'application/json'
       }
-    }
+    };
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`, fetchConfig)
-      const info = await response.json()
-      const { profile, token } = info
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`, fetchConfig);
+      const info = await response.json();
+      const { profile, token } = info;
 
-      Cookies.set('token', token, { path: '/' })
-      Cookies.set('isLoggedIn', 'true', { path: '/' })
-      Cookies.set('name', profile.name, { path: '/' })
-      Cookies.set('lastName', profile.lastName, { path: '/' })
-      Cookies.set('email', profile.email, { path: '/' })
+      Cookies.set('token', token, { path: '/' });
+      Cookies.set('isLoggedIn', 'true', { path: '/' });
+      Cookies.set('name', profile.name, { path: '/' });
+      Cookies.set('lastName', profile.lastName, { path: '/' });
+      Cookies.set('email', profile.email, { path: '/' });
       Cookies.set('role', profile.role, { path: '/' });
 
       if (!profile.role) {
         router.push('/torneos')
       } else {
         router.push('/admin')
-      }
+      };
 
-      setIsLoggedIn(true)
+      setIsLoggedIn(true);
     } catch (error) {
-
-    }
-
-  }
+      setErrorData(true);
+    };
+  };
 
   return (
     <div className='w-full flex flex-col items-center mt-10'>
@@ -119,6 +119,7 @@ const Register = () => {
             onChange={handleChange}
             className='rounded-lg text-black p-1'
           />
+          {errorData && <p className='text-red-500'>Error al registrar al usuario, inténtelo de nuevo</p>}
         </section>
         <section className='my-3 flex flex-col'>
           <button
@@ -147,7 +148,7 @@ const Register = () => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
