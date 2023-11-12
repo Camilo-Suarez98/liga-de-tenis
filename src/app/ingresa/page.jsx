@@ -1,11 +1,13 @@
 "use client"
-import Link from 'next/link'
 import React, { useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { FcGoogle } from 'react-icons/fc'
 import Cookies from 'js-cookie'
 
 const Login = () => {
   const [userData, setUserData] = useState({})
+  const router = useRouter()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -16,10 +18,33 @@ const Login = () => {
     })
   }
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
 
-    Cookies.set('email', userData.email)
+    const fetchConfig = {
+      method: 'POST',
+      body: JSON.stringify(userData),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/local/login`, fetchConfig)
+    const info = await response.json()
+    const { profile, token } = info
+
+    Cookies.set('token', token, { path: '' })
+    Cookies.set('isLoggedIn', 'true', { path: '/' })
+    Cookies.set('name', profile.name, { path: '' })
+    Cookies.set('lastName', profile.lastName, { path: '' })
+    Cookies.set('email', profile.email, { path: '' })
+    Cookies.set('role', profile.role, { path: '' });
+
+    if (!profile.role) {
+      router.push('/torneos')
+    } else {
+      router.push('/')
+    }
   }
 
   return (
@@ -34,7 +59,7 @@ const Login = () => {
             Correo:
           </label>
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
             onChange={handleChange}
@@ -49,7 +74,7 @@ const Login = () => {
             Contraseña:
           </label>
           <input
-            type="text"
+            type="password"
             name="password"
             id="password"
             onChange={handleChange}

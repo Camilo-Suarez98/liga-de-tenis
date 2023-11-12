@@ -1,11 +1,13 @@
 "use client"
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { FcGoogle } from 'react-icons/fc'
 import Cookies from 'js-cookie'
 
 const Register = () => {
   const [newUserData, setNewUserData] = useState({})
+  const router = useRouter()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -16,15 +18,34 @@ const Register = () => {
     })
   }
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault()
 
-    Cookies.set('name', userData.name)
+    const fetchConfig = {
+      method: 'POST',
+      body: JSON.stringify(newUserData),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`, fetchConfig)
+    const info = await response.json()
+    const { profile, token } = info
+
+    Cookies.set('token', token, { path: '' })
+    Cookies.set('isLoggedIn', 'true', { path: '/' })
+    Cookies.set('name', profile.name, { path: '' })
+    Cookies.set('lastName', profile.lastName, { path: '' })
+    Cookies.set('email', profile.email, { path: '' })
+    Cookies.set('role', profile.role, { path: '' });
+
+    router.push('/torneos')
   }
 
   return (
     <div className='w-full flex flex-col items-center mt-10'>
-      <h2 className='text-4xl my-4'>Registro</h2>
+      <h2 className='text-4xl my-4 sm:text-5xl'>Registro</h2>
       <form onSubmit={handleRegister} className='w-56 border-2 border-blue-500 p-3 rounded-xl sm:w-72'>
         <section className='my-3 flex flex-col'>
           <label
@@ -64,7 +85,7 @@ const Register = () => {
             Correo:
           </label>
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
             onChange={handleChange}
@@ -79,7 +100,7 @@ const Register = () => {
             Contraseña:
           </label>
           <input
-            type="text"
+            type="password"
             name="password"
             id="password"
             onChange={handleChange}
