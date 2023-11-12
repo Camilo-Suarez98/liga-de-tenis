@@ -1,14 +1,14 @@
-import Loader from '@/app/(components)/Loader'
-import React, { Suspense } from 'react'
+import Loader from '@/app/(components)/Loader';
+import React, { Suspense } from 'react';
 
 async function getTournament(detail) {
-  const tournamentResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournament/${detail}`)
-  return tournamentResponse.json()
-}
+  const tournamentResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournament/${detail}`);
+  return tournamentResponse.json();
+};
 
 export default async function TournamentDetail({ params }) {
-  const tournament = await getTournament(params.id)
-  const { data } = tournament
+  const tournament = await getTournament(params.id);
+  const { data } = tournament;
 
   return (
     <div className='flex flex-col items-center justify-start mt-16'>
@@ -25,5 +25,5 @@ export default async function TournamentDetail({ params }) {
         </button>
       </Suspense>
     </div>
-  )
-}
+  );
+};
