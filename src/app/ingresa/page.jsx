@@ -1,28 +1,28 @@
-"use client"
-import React, { useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { FcGoogle } from 'react-icons/fc'
-import Cookies from 'js-cookie'
-import { useAuth } from '../(utils)/AuthContext'
+"use client";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { FcGoogle } from 'react-icons/fc';
+import Cookies from 'js-cookie';
+import { useAuth } from '../(utils)/AuthContext';
 
 const Login = () => {
   const [userData, setUserData] = useState({});
-  const [userError, setUserError] = useState(false)
+  const [userError, setUserError] = useState(false);
   const router = useRouter();
   const { setIsLoggedIn } = useAuth();
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
     setUserData({
       ...userData,
       [name]: value
-    })
-  }
+    });
+  };
 
   const handleLogin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const fetchConfig = {
       method: 'POST',
@@ -30,31 +30,31 @@ const Login = () => {
       headers: {
         'Content-Type': 'application/json'
       }
-    }
+    };
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/local/login`, fetchConfig)
-      const info = await response.json()
-      const { profile, token } = info
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/local/login`, fetchConfig);
+      const info = await response.json();
+      const { profile, token } = info;
 
-      Cookies.set('token', token, { path: '/' })
-      Cookies.set('isLoggedIn', 'true', { path: '/' })
-      Cookies.set('name', profile.name, { path: '/' })
-      Cookies.set('lastName', profile.lastName, { path: '/' })
-      Cookies.set('email', profile.email, { path: '/' })
+      Cookies.set('token', token, { path: '/' });
+      Cookies.set('isLoggedIn', 'true', { path: '/' });
+      Cookies.set('name', profile.name, { path: '/' });
+      Cookies.set('lastName', profile.lastName, { path: '/' });
+      Cookies.set('email', profile.email, { path: '/' });
       Cookies.set('role', profile.role, { path: '/' });
 
       if (!profile.role) {
         router.push('/torneos')
       } else {
         router.push('/admin')
-      }
+      };
 
-      setIsLoggedIn(true)
+      setIsLoggedIn(true);
     } catch (error) {
-      setUserError(true)
-    }
-  }
+      setUserError(true);
+    };
+  };
 
   return (
     <div className='w-full flex flex-col items-center mt-10'>
@@ -118,7 +118,7 @@ const Login = () => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
