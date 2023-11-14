@@ -6,14 +6,13 @@ import { useAuth } from '../utils/AuthContext';
 
 const Header = () => {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
-  const isAdmin = Cookies.get('role') === 'true'
   const router = useRouter()
 
   const handleLogOut = () => {
-    Cookies.remove('token')
-    Cookies.remove('name')
-    Cookies.remove('lastName')
-    Cookies.remove('email')
+    Cookies.remove('token');
+    Cookies.remove('name');
+    Cookies.remove('lastName');
+    Cookies.remove('email');
     Cookies.remove('role');
     Cookies.remove('isLoggedIn');
 
@@ -31,7 +30,7 @@ const Header = () => {
       <div className='flex justify-evenly items-center w-60 sm:w-80'>
         <Link className='hover:text-blue-500 hover:font-bold' href='/'>Inicio</Link>
 
-        <Link className={isAdmin ? 'hover:text-blue-500 hover:font-bold' : 'hidden'} href='/admin'>
+        <Link className={'hover:text-blue-500 hover:font-bold'} href='/admin'>
           Administrador
         </Link>
 
@@ -42,12 +41,13 @@ const Header = () => {
           Torneos
         </Link>
 
-        <Link className={isLoggedIn ? 'hidden' : 'hover:text-blue-500 hover:font-bold'} href='/ingresa'>
-          Ingresar
-        </Link>
         <button className={!isLoggedIn ? 'hidden' : 'hover:text-blue-500 hover:font-bold'} onClick={handleLogOut}>
           Salir
         </button>
+
+        <Link className={isLoggedIn ? 'hidden' : 'hover:text-blue-500 hover:font-bold'} href='/ingresa'>
+          Ingresar
+        </Link>
       </div>
     </header>
   )
