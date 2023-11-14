@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Cookies from 'js-cookie'
 import { useAuth } from '@/app/(utils)/AuthContext'
 import Loader from '../Loader'
 

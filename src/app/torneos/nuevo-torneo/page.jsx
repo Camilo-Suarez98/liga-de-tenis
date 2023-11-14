@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
@@ -6,6 +7,7 @@ const NewTournament = () => {
   const [newTournament, setNewTournament] = useState({});
   const [errorData, setErrorData] = useState(false)
   const router = useRouter();
+  const token = Cookies.get('token')
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,14 +25,12 @@ const NewTournament = () => {
       body: JSON.stringify(newTournament),
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${Cookies.get('token')}`,
+        'Authorization': `Bearer ${token}`,
       }
     };
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournament`, fetchConfig);
-      const newTour = await response.json()
-      console.log(newTour);
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournament`, fetchConfig);
       router.push('/admin')
     } catch (error) {
       setErrorData(true)

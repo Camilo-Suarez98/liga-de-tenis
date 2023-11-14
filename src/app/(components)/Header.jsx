@@ -2,7 +2,6 @@
 import Cookies from 'js-cookie';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-import React from 'react'
 import { useAuth } from '../(utils)/AuthContext';
 
 const Header = () => {
@@ -12,7 +11,6 @@ const Header = () => {
 
   const handleLogOut = () => {
     Cookies.remove('token')
-    Cookies.remove('isLoggedIn')
     Cookies.remove('name')
     Cookies.remove('lastName')
     Cookies.remove('email')
@@ -24,35 +22,35 @@ const Header = () => {
 
   return (
     <header className='h-16 flex justify-between items-center sm:px-6'>
-      <section>
+      <div>
         <Link href='/'>
           <h1>Liga de tenis NJS</h1>
         </Link>
-      </section>
-      <section className='flex justify-evenly items-center w-60 sm:w-80'>
+      </div>
+      <div className='flex justify-evenly items-center w-60 sm:w-80'>
         <Link className='hover:text-blue-500 hover:font-bold' href='/'>Inicio</Link>
-        {!isAdmin || !isLoggedIn ?
-          <Link
-            className='hover:text-blue-500 hover:font-bold'
-            href='/torneos'
-          >
-            Torneos
-          </Link> :
-          <>
-            <Link
-              className='hover:text-blue-500 hover:font-bold'
-              href='/torneos'
-            >
-              Torneos
-            </Link>
-            <Link className='hover:text-blue-500 hover:font-bold' href='/admin'>Administrador</Link>
-          </>
+        <Link
+          className='hover:text-blue-500 hover:font-bold'
+          href='/torneos'
+        >
+          Torneos
+        </Link>
+
+        {isAdmin &&
+          <Link className='hover:text-blue-500 hover:font-bold' href='/admin'>
+            Administrador
+          </Link>
         }
+
         {!isLoggedIn ?
-          <Link className='hover:text-blue-500 hover:font-bold' href='/ingresa'>Ingresar</Link> :
-          <button className='hover:text-blue-500 hover:font-bold' onClick={handleLogOut}>Salir</button>
+          <Link className='hover:text-blue-500 hover:font-bold' href='/ingresa'>
+            Ingresar
+          </Link> :
+          <button className='hover:text-blue-500 hover:font-bold' onClick={handleLogOut}>
+            Salir
+          </button>
         }
-      </section>
+      </div>
     </header>
   )
 }

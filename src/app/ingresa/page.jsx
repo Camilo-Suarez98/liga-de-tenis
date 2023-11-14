@@ -38,7 +38,6 @@ const Login = () => {
       const { profile, token } = info;
 
       Cookies.set('token', token, { path: '/' });
-      Cookies.set('isLoggedIn', 'true', { path: '/' });
       Cookies.set('name', profile.name, { path: '/' });
       Cookies.set('lastName', profile.lastName, { path: '/' });
       Cookies.set('email', profile.email, { path: '/' });
