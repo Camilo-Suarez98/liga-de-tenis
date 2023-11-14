@@ -1,6 +1,6 @@
 import './globals.css';
-import Header from './(components)/Header';
-import { AuthProvider } from './(utils)/AuthContext';
+import Header from '../components/Header';
+import { AuthProvider } from '../utils/AuthContext';
 
 export const metadata = {
   title: 'Liga de Tenis NJS',

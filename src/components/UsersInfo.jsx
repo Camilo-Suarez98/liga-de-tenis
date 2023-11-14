@@ -1,8 +1,10 @@
 'use client'
 import React, { useState, useEffect } from 'react'
+import Loader from './Loader';
 
 const UsersInfo = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   async function getUsers() {
     const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`);
@@ -14,6 +16,7 @@ const UsersInfo = () => {
       try {
         const usersInfo = await getUsers()
         setUsers(usersInfo?.data);
+        setLoading(false)
       } catch (error) {
         throw new Error(error)
       };
@@ -21,6 +24,10 @@ const UsersInfo = () => {
 
     fetchData();
   }, []);
+
+  if (loading) {
+    return <Loader />
+  }
 
   return (
     <div className='content-table-2'>

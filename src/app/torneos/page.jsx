@@ -1,5 +1,5 @@
-import React from 'react'
-import Loader from '../(components)/Loader';
+'use client'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link';
 
 async function getTournaments() {
@@ -7,15 +7,27 @@ async function getTournaments() {
   return tournamentResponse.json();
 };
 
-export default async function Tournament() {
-  const tournaments = await getTournaments();
+export default function Tournament() {
+  const [tournaments, setTournaments] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const tournamentsInfo = await getTournaments()
+        setTournaments(tournamentsInfo.data);
+      } catch (error) {
+        throw new Error(error)
+      };
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className='flex flex-col items-center justify-start'>
       <h2 className='text-3xl sm:text-4xl my-10'>Torneos disponibles</h2>
-      {/* <Suspense fallback={<Loader />}> */}
       <div className='w-11/12 my-0 m-auto flex flex-wrap justify-center gap-6'>
-        {tournaments.data.map(tournament => {
+        {tournaments.map(tournament => {
           return (
             <div
               key={tournament._id}
@@ -34,7 +46,6 @@ export default async function Tournament() {
           )
         })}
       </div>
-      {/* </Suspense> */}
     </div>
   );
 };

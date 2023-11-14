@@ -5,9 +5,8 @@ import Cookies from 'js-cookie';
 
 const NewTournament = () => {
   const [newTournament, setNewTournament] = useState({});
-  const [errorData, setErrorData] = useState(false)
   const router = useRouter();
-  const token = Cookies.get('token')
+  const token = Cookies.get('token');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,8 +16,9 @@ const NewTournament = () => {
       [name]: value
     });
   };
+
   const handleCreateTournament = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const fetchConfig = {
       method: 'POST',
@@ -31,11 +31,11 @@ const NewTournament = () => {
 
     try {
       fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournament`, fetchConfig);
-      router.push('/admin')
+      router.push('/admin');
     } catch (error) {
-      setErrorData(true)
-    }
-  }
+      throw new Error(error);
+    };
+  };
 
   return (
     <div className='w-full flex flex-col items-center mt-10'>

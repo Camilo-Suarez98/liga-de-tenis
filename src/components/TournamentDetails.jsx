@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
+import Loader from './Loader';
 
 async function getTournament(detail) {
   const tournamentResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournament/${detail}`);
@@ -11,6 +12,7 @@ async function getTournament(detail) {
 
 const TournamentDetailComponent = ({ params }) => {
   const [tournament, setTournament] = useState()
+  const [loading, setLoading] = useState(true)
   const token = Cookies.get('token');
   const isAdmin = Cookies.get('role') === 'true';
   const router = useRouter();
@@ -20,12 +22,17 @@ const TournamentDetailComponent = ({ params }) => {
       try {
         const tournamentData = await getTournament(params.id)
         setTournament(tournamentData.data)
+        setLoading(false)
       } catch (error) {
         throw new Error(error)
       }
     }
     fetchData()
-  }, [])
+  }, [params.id])
+
+  if (loading) {
+    return <Loader />
+  }
 
   const handleDeleteTournament = async () => {
     const fetchConfig = {

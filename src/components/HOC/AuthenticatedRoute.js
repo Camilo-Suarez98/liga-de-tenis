@@ -1,25 +1,25 @@
-'use client'
-import React, { useState, useEffect } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@/app/(utils)/AuthContext'
-import Loader from '../Loader'
+import Cookies from 'js-cookie'
 
 const authenticatedRoute = (Component = null, options = {}) => {
+
   const AuthenticatedRoute = (props) => {
-    const router = useRouter()
-    const { isLoggedIn } = useAuth()
     const [loading, setLoading] = useState(true)
+    const isAdmin = Cookies.get('role') === 'true';
+    const router = useRouter()
 
     useEffect(() => {
-      if (isLoggedIn) {
+      if (isAdmin) {
         setLoading(false)
       } else {
-        router.replace(options.pathAfterFailure || '/')
+        router.push(options.pathAfterFailure || '/')
       }
-    }, [isLoggedIn, router])
+    }, [isAdmin, router])
 
     if (loading) {
-      return <Loader />
+      return <div>Loading... </div>
     }
 
     return <Component {...props} />
@@ -27,4 +27,5 @@ const authenticatedRoute = (Component = null, options = {}) => {
 
   return AuthenticatedRoute
 }
+
 export default authenticatedRoute

@@ -382,9 +382,6 @@ body {
 }
 
 .table {
-  border: 1px solid #3c82f6;
-  border-right: none;
-  border-left: none;
   color: #fff;
   border-collapse: collapse;
   width: 100%;
@@ -407,7 +404,7 @@ body {
 
 .table .pad-row {
   padding: 10px 0;
-  width: 23%;
+  width: 25%;
 }
 
 .table .pad-row-2 {

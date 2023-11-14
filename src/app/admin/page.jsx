@@ -1,28 +1,26 @@
-import { Suspense, lazy } from 'react';
+'use client'
 import Link from 'next/link';
-import Loader from '../(components)/Loader';
-const TournamentsTable = lazy(() => import('../(components)/TournamentsTable'));
-const UsersInfo = lazy(() => import('../(components)/UsersInfo'));
+import TournamentsTable from '@/components/TournamentsTable';
+import UsersInfo from '@/components/UsersInfo';
+import authenticatedRoute from '@/components/HOC/AuthenticatedRoute';
 
-export default function Dashboard() {
+const Dashboard = () => {
   return (
     <div className='flex flex-col items-center justify-start mt-10'>
-      <div className='flex justify-around items-center sm:w-full'>
+      <div className='flex flex-col items-center my-5 sm:flex-row sm:justify-around sm:w-full'>
         <h2 className='text-4xl my-4'>Lista de Torneos</h2>
         <Link
           href='/torneos/nuevo-torneo'
-          className='bg-blue-500 rounded-lg p-2 transition duration-300 hover:bg-transparent hover:border-2 hover:border-blue-500 min-[320px]:px-2 min-[320px]:py-1 sm:px-3 sm:py-2 sm:text-xl'
+          className='bg-blue-500 rounded-lg p-2 transition duration-300 hover:bg-blue-400 min-[320px]:px-2 min-[320px]:py-1 sm:px-3 sm:py-2 sm:text-xl'
         >
           Nuevo Torneo
         </Link>
       </div>
-      <Suspense fallback={<Loader />}>
-        <TournamentsTable />
-      </Suspense>
-      <h2>Lista de usuarios</h2>
-      <Suspense fallback={<Loader />}>
-        <UsersInfo />
-      </Suspense>
+      <TournamentsTable />
+      <h2 className='text-4xl text-left mt-12 mb-6'>Lista de usuarios</h2>
+      <UsersInfo />
     </div>
   );
 };
+
+export default authenticatedRoute(Dashboard, { pathAfterFailure: '/' });

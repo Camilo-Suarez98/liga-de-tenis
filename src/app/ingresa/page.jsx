@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
 import Cookies from 'js-cookie';
-import { useAuth } from '../(utils)/AuthContext';
+import { useAuth } from '../../utils/AuthContext';
 
 const Login = () => {
   const [userData, setUserData] = useState({});

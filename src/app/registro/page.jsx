@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
-import { useAuth } from '../(utils)/AuthContext';
+import { useAuth } from '../../utils/AuthContext';
 import Cookies from 'js-cookie';
 
 const Register = () => {
