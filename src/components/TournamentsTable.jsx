@@ -28,7 +28,7 @@ const TournamentsTable = () => {
 
   if (loading) {
     return <Loader />
-  }
+  };
 
   return (
     <div className='content-table'>
@@ -53,7 +53,14 @@ const TournamentsTable = () => {
                 <td className='table-letter pad-row-2 text-center'>{tournament.city}</td>
                 <td className='table-letter pad-row-2 text-center'>{tournament.date}</td>
                 <td className='table-letter pad-row-2 text-center'>
-                  {tournament.participants.length === 0 && 'No hay participantes'}
+                  {tournament.participants.length === 0 ?
+                    'No hay participantes' :
+                    tournament.participants.map(user => {
+                      return (
+                        <p key={user._id}>{user.name} {user.lastName},</p>
+                      )
+                    })
+                  }
                 </td>
                 <td className='pad-row-2 text-center hover:text-blue-400 hover:font-bold'>
                   <Link href={`/torneos/${tournament._id}`} className='text-blue-500'>Ver más</Link>
