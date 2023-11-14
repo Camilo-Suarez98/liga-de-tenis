@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     Cookies.set('isLoggedIn', isLoggedIn)
-  }, [isLoggedIn, saveLoggedIn]);
+  }, [isLoggedIn]);
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
