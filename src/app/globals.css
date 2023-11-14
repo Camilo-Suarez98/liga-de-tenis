@@ -374,8 +374,17 @@ body {
   width: 75%;
 }
 
+.content-table-2 {
+  overflow-y: hidden;
+  white-space: nowrap;
+  border-radius: 10px;
+  width: 60%;
+}
+
 .table {
   border: 1px solid #3c82f6;
+  border-right: none;
+  border-left: none;
   color: #fff;
   border-collapse: collapse;
   width: 100%;
