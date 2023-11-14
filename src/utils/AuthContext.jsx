@@ -5,11 +5,11 @@ import { createContext, useContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const saveLoggedIn = Cookies.get('isLoggedIn') === 'true'
+  const saveLoggedIn = Cookies.get('role') === 'true';
   const [isLoggedIn, setIsLoggedIn] = useState(saveLoggedIn);
 
   useEffect(() => {
-    Cookies.set('isLoggedIn', isLoggedIn)
+    Cookies.set('isLoggedIn', isLoggedIn);
   }, [isLoggedIn]);
 
   return (
