@@ -4,7 +4,14 @@ import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
 const NewTournament = () => {
-  const [newTournament, setNewTournament] = useState({});
+  const [newTournament, setNewTournament] = useState({
+    name: "",
+    description: "",
+    date: "",
+    location: "",
+    city: "",
+    price: ""
+  });
   const router = useRouter();
   const token = Cookies.get('token');
 
