@@ -114,7 +114,7 @@ Este es el de un usuario ya registrado
 
 1. Este es el inicio de la página
 
-![Alt text](image-2.png)
+![Alt text](public/image-2.png)
 
 2. Esta es la pagina donde el usuario puede ver los torneos dando click en el boton 'Ver Torneos' de la pagina de inicio, tambien puede dar click en el header boton 'Torneos'
 
@@ -122,15 +122,15 @@ La aplicaión cuenta con un servicio de autenticación con terceros que permite 
 
 3. Esta es la páina de Torneos
 
-![Alt text](image-3.png)
+![Alt text](public/image-3.png)
 
 4. Esta es la pagina de inicio de sesión, en caso de no estar registrado el usuario puede dar click debajo del boton 'Ingreasr' que lo redirige a la pagina de registro.
 
-![Alt text](image.png)
+![Alt textpublic/](image.png)
 
 5. Esta es la pagina de registro, al igual que en la de inicio de sesion el usuario puede registrarse mediante su cuenta de Google
 
-![Alt text](image-4.png)
+![Alt text](public/image-4.png)
 
 6. Página de administrador
 
@@ -138,22 +138,22 @@ Aqui el administrador puede ver los torneos y usuarios activos en la aplicación
 
 Además, le permite crear nuevos torneos.
 
-![Alt text](image-5.png)
+![Alt text](public/image-5.png)
 
 7. Cuando el administrador da click en 'Nuevo Torneo' lo redirige a la siguiente pagina, la cual es un formulario en el cual el completa con los datos.
 
-![Alt text](image-8.png)
+![Alt text](public/image-8.png)
 
 8. Este es el detalle del torneo.
 
 Solo el administrador tiene la opción de editar o eliminar el torneo.
 
-![Alt text](image-6.png)
+![Alt text](public/image-6.png)
 
 Los usuarios no cuentan con esos botones como se puede ver en la siguiente imagen.
 
-![Alt text](image-7.png)
+![Alt text](public/image-7.png)
 
 9. Esta el la página en la cual el administrador edita los torneos, puede cambiar cualquier información acerca de el.
 
-![Alt text](image-9.png)
+![Alt text](public/image-9.png)
