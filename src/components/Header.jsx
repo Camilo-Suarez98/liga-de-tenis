@@ -41,16 +41,20 @@ const Header = () => {
           Torneos
         </Link>
 
-        <button className={!isLoggedIn ? 'hidden' : 'hover:text-blue-500 hover:font-bold'} onClick={handleLogOut}>
-          Salir
-        </button>
+        {isLoggedIn ?
+          <button className={'hover:text-blue-500 hover:font-bold'} onClick={handleLogOut}>
+            Salir
+          </button> :
 
-        <Link className={isLoggedIn ? 'hidden' : 'hover:text-blue-500 hover:font-bold'} href='/ingresa'>
-          Ingresar
-        </Link>
+          <button className={'hover:text-blue-500 hover:font-bold'}>
+            <Link href='/ingresa'>
+              Ingresar
+            </Link>
+          </button>
+        }
       </div>
     </header>
   )
 }
 
-export default Header
+export default Header;

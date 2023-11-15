@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import Cookies from 'js-cookie'
 
 const authenticatedRoute = (Component = null, options = {}) => {
@@ -8,15 +8,15 @@ const authenticatedRoute = (Component = null, options = {}) => {
   const AuthenticatedRoute = (props) => {
     const [loading, setLoading] = useState(true)
     const isAdmin = Cookies.get('role') === 'true';
-    const router = useRouter()
+    // const router = useRouter()
 
     useEffect(() => {
       if (isAdmin) {
         setLoading(false)
       } else {
-        router.push(options.pathAfterFailure || '/')
+        redirect(options.pathAfterFailure || '/')
       }
-    }, [isAdmin, router])
+    }, [isAdmin])
 
     if (loading) {
       return <div>Loading... </div>
