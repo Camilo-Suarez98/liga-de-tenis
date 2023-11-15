@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import Loader from '@/components/Loader';
+import authenticatedRoute from '@/components/HOC/AuthenticatedRoute';
 
 async function getTournament(detail) {
   const tournamentResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournament/${detail}`);
@@ -70,7 +71,7 @@ const EditTournament = ({ params }) => {
   return (
     <div className='w-full flex flex-col items-center mt-10'>
       <h2 className='text-4xl my-4 sm:text-5xl'>Editar Torneo</h2>
-      <form onSubmit={handleEditTournament} className='w-56 border-2 border-blue-500 p-3 rounded-xl sm:w-72'>
+      <form onSubmit={handleEditTournament} className='w-56 border-2 border-blue-500 py-3 px-6 rounded-xl sm:w-72'>
         <section className='my-3 flex flex-col'>
           <label
             htmlFor="name"
@@ -179,4 +180,4 @@ const EditTournament = ({ params }) => {
   );
 };
 
-export default EditTournament;
+export default authenticatedRoute(EditTournament, { pathAfterFailure: '/' });

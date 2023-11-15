@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+import authenticatedRoute from '@/components/HOC/AuthenticatedRoute';
 
 const NewTournament = () => {
   const [newTournament, setNewTournament] = useState({
@@ -47,7 +48,7 @@ const NewTournament = () => {
   return (
     <div className='w-full flex flex-col items-center mt-10'>
       <h2 className='text-4xl my-4 sm:text-5xl'>Nuevo Torneo</h2>
-      <form onSubmit={handleCreateTournament} className='w-56 border-2 border-blue-500 p-3 rounded-xl sm:w-72'>
+      <form onSubmit={handleCreateTournament} className='w-56 border-2 border-blue-500 py-3 px-6 rounded-xl sm:w-72'>
         <section className='my-3 flex flex-col'>
           <label
             htmlFor="name"
@@ -150,4 +151,4 @@ const NewTournament = () => {
   );
 };
 
-export default NewTournament;
+export default authenticatedRoute(NewTournament, { pathAfterFailure: '/' });
