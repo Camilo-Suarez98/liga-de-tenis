@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
 import { useAuth } from '../../utils/AuthContext';
+import { signIn, useSession } from 'next-auth/react';
 import Cookies from 'js-cookie';
 
 const Register = () => {
@@ -11,6 +12,10 @@ const Register = () => {
   const [errorData, setErrorData] = useState(false)
   const router = useRouter();
   const { setIsLoggedIn } = useAuth();
+  const { data: session } = useSession();
+  const name = session?.user.name.split(' ')[0];
+  const lastName = session?.user.name.split(' ')[1];
+  const email = session?.user.email;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,10 +60,51 @@ const Register = () => {
     };
   };
 
+  const handleGoogleRegister = () => {
+    signIn();
+  };
+
+  useEffect(() => {
+    if (session?.user?.name !== undefined) {
+      handleAfterGoogleRegister();
+    }
+  }, [session?.user?.name]);
+
+  const handleAfterGoogleRegister = async () => {
+    try {
+      const data = {
+        name,
+        lastName,
+        email
+      };
+
+      const fetchConfig = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google/`, fetchConfig);
+      const { token, profile } = await response.json();
+
+      Cookies.set('token', token, { path: '/' });
+      Cookies.set('name', profile.name, { path: '/' });
+      Cookies.set('lastName', profile.lastName, { path: '/' });
+      Cookies.set('email', profile.email, { path: '/' });
+      Cookies.set('role', profile.role, { path: '/' });
+
+      router.push('/torneos')
+      setIsLoggedIn(true);
+    } catch (error) {
+      setErrorData(true);
+    }
+  }
+
   return (
     <div className='w-full flex flex-col items-center mt-10'>
       <h2 className='text-4xl my-4 sm:text-5xl'>Registro</h2>
-      <form onSubmit={handleRegister} className='w-56 border-2 border-blue-500 p-3 rounded-xl sm:w-72'>
+      <form onSubmit={handleRegister} className='w-56 border-2 border-blue-500 py-3 px-6 rounded-xl sm:w-72'>
         <section className='my-3 flex flex-col'>
           <label
             htmlFor="name"
@@ -140,10 +186,11 @@ const Register = () => {
         </h3>
         <h4 className='text-center'>Ó</h4>
         <button
+          onClick={handleGoogleRegister}
           className='border-blue-500 border-2 transition duration-300 w-full flex items-center px-3 rounded-xl hover:bg-blue-500 min-[320px]:px-2 min-[320px]:py-1 sm:px-3 sm:py-2 sm:text-xl md:mt-2'
         >
           <FcGoogle className='mr-2' />
-          Ingresa con Google
+          Registro con Google
         </button>
       </form>
     </div>
