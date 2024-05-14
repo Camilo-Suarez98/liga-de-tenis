@@ -1,8 +1,9 @@
 # Liga de Tenis NJS - Una aplicación para ver y participar en torneos de Tenis 🎾
 
-Este proyecto fue desarrollado utilizando NextJs v14 junto con TailwindCSS para el desarrollo frontend. Se utilizó Node junto con Express y MongoDB para la base de datos junto con Mongoose. Finalmente, El frontend está desplegado en Vercel y el backend en Render
+Este proyecto fue desarrollado utilizando Next.JS v14 junto con TailwindCSS para el desarrollo frontend. Se utilizó Node junto con Express y MongoDB para la base de datos junto con Mongoose. Finalmente, El frontend está desplegado en Vercel y el backend en Render
 
 ## Caracteristicas del proyecto:
+
 - Es una aplicación que permite crear torneos de Tenis.
 - Permite editar la información del torneo o eliminarlo.
 - Los usuarios pueden inscribirse a cualquier torneo disponible
@@ -11,14 +12,14 @@ Este proyecto fue desarrollado utilizando NextJs v14 junto con TailwindCSS para 
 
 Estas instrucciones te permitirán obtener una copia del proyecto en tu local, para desarrollo o testing. 
 
-### instalación 🔧
+### Instalación 🔧
 
 1. Clona los repositorios en tu local: 
 ```
 git clone git@github.com:Camilo-Suarez98/liga-de-tenis.git
 ```
 
-y
+y el repositorio del backend:
 
 ```
 git@github.com:Camilo-Suarez98/liga-de-tenis-back.git
@@ -49,7 +50,7 @@ sudo apt install nodejs npm
 npm install
 ```
 
-4. Crea un archivo `.env.local` en la raiz del proyecto.
+4. Crea un archivo `.env.local` en la raiz del proyecto (veras un archivo .env.example en el repositorio que funciona como guia para crear tu local).
 
 5. Corre el codigo!
 
@@ -116,19 +117,19 @@ Este es el de un usuario ya registrado
 
 ![Alt text](public/image-2.png)
 
-2. Esta es la pagina donde el usuario puede ver los torneos dando click en el boton 'Ver Torneos' de la pagina de inicio, tambien puede dar click en el header boton 'Torneos'
+2. Esta es la pagina donde el usuario puede ver los torneos dando click en el boton 'Ver Torneos' de la pagina de inicio, tambien puede dar click en el header boton 'Torneos'.
 
-La aplicaión cuenta con un servicio de autenticación con terceros que permite al usuario hacer el registro e ingreso desde Google
+La aplicaión cuenta con un servicio de autenticación con terceros que permite al usuario hacer el registro e ingreso desde Google.
 
 3. Esta es la páina de Torneos
 
 ![Alt text](public/image-3.png)
 
-4. Esta es la pagina de inicio de sesión, en caso de no estar registrado el usuario puede dar click debajo del boton 'Ingreasr' que lo redirige a la pagina de registro.
+4. Esta es la pagina de inicio de sesión, en caso de no estar registrado el usuario puede dar click debajo del boton 'Ingresar' que lo redirige a la pagina de registro.
 
 ![Alt textpublic/](image.png)
 
-5. Esta es la pagina de registro, al igual que en la de inicio de sesion el usuario puede registrarse mediante su cuenta de Google
+5. Esta es la pagina de registro, al igual que en la de inicio de sesión el usuario puede registrarse mediante su cuenta de Google.
 
 ![Alt text](public/image-4.png)
 
@@ -146,7 +147,7 @@ Además, le permite crear nuevos torneos.
 
 8. Este es el detalle del torneo.
 
-Solo el administrador tiene la opción de editar o eliminar el torneo.
+Solo el administrador tiene la opción de editar o eliminar los torneos.
 
 ![Alt text](public/image-6.png)
 
