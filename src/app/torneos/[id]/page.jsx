@@ -1,10 +1,11 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import Loader from '@/components/Loader';
 import { useJwt } from "react-jwt";
+
+import Loader from '@/components/Loader';
 
 async function getTournament(detail) {
   const tournamentResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournament/${detail}`);

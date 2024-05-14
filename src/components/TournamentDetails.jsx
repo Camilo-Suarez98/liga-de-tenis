@@ -1,8 +1,9 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
+
 import Loader from './Loader';
 
 async function getTournament(detail) {
@@ -11,8 +12,8 @@ async function getTournament(detail) {
 }
 
 const TournamentDetailComponent = ({ params }) => {
-  const [tournament, setTournament] = useState()
-  const [loading, setLoading] = useState(true)
+  const [tournament, setTournament] = useState();
+  const [loading, setLoading] = useState(true);
   const token = Cookies.get('token');
   const isAdmin = Cookies.get('role') === 'true';
   const router = useRouter();
@@ -20,18 +21,18 @@ const TournamentDetailComponent = ({ params }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const tournamentData = await getTournament(params.id)
-        setTournament(tournamentData.data)
-        setLoading(false)
+        const tournamentData = await getTournament(params.id);
+        setTournament(tournamentData.data);
+        setLoading(false);
       } catch (error) {
-        throw new Error(error)
+        throw new Error(error);
       }
     }
-    fetchData()
+    fetchData();
   }, [params.id])
 
   if (loading) {
-    return <Loader />
+    return <Loader />;
   }
 
   const handleDeleteTournament = async () => {

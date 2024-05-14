@@ -1,5 +1,5 @@
-'use client'
-import { useRouter } from "next/navigation"
+'use client';
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter()
@@ -15,5 +15,5 @@ export default function Home() {
         Ver Torneos
       </button>
     </main>
-  )
-}
+  );
+};

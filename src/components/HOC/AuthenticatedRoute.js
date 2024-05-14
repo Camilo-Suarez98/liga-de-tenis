@@ -1,31 +1,32 @@
 
-import React, { useEffect, useState } from 'react'
-import { redirect } from 'next/navigation'
-import Cookies from 'js-cookie'
+import React, { useEffect, useState } from 'react';
+import { redirect } from 'next/navigation';
+import Cookies from 'js-cookie';
+
+import Loader from '../Loader';
 
 const authenticatedRoute = (Component = null, options = {}) => {
 
   const AuthenticatedRoute = (props) => {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
     const isAdmin = Cookies.get('role') === 'true';
-    // const router = useRouter()
 
     useEffect(() => {
       if (isAdmin) {
-        setLoading(false)
+        setLoading(false);
       } else {
-        redirect(options.pathAfterFailure || '/')
+        redirect(options.pathAfterFailure || '/');
       }
-    }, [isAdmin])
+    }, [isAdmin]);
 
     if (loading) {
-      return <div>Loading... </div>
+      return <Loader />;
     }
 
-    return <Component {...props} />
+    return <Component {...props} />;
   }
 
-  return AuthenticatedRoute
-}
+  return AuthenticatedRoute;
+};
 
-export default authenticatedRoute
+export default authenticatedRoute;

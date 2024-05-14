@@ -1,5 +1,6 @@
-'use client'
+'use client';
 import Link from 'next/link';
+
 import TournamentsTable from '@/components/TournamentsTable';
 import UsersInfo from '@/components/UsersInfo';
 import authenticatedRoute from '@/components/HOC/AuthenticatedRoute';

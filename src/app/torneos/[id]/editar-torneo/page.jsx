@@ -1,7 +1,8 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+
 import Loader from '@/components/Loader';
 import authenticatedRoute from '@/components/HOC/AuthenticatedRoute';
 
@@ -65,7 +66,7 @@ const EditTournament = ({ params }) => {
   };
 
   if (loading) {
-    return <Loader />
+    return <Loader />;
   };
 
   return (

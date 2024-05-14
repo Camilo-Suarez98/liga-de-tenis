@@ -1,5 +1,5 @@
-'use client'
-import React, { useState, useEffect } from 'react'
+'use client';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 async function getTournaments() {
@@ -13,10 +13,10 @@ export default function Tournament() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const tournamentsInfo = await getTournaments()
+        const tournamentsInfo = await getTournaments();
         setTournaments(tournamentsInfo.data);
       } catch (error) {
-        throw new Error(error)
+        throw new Error(error);
       };
     };
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Loader = () => {
   return (
@@ -20,7 +20,7 @@ const Loader = () => {
       </div>
       <div className="spoke"></div>
     </div>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;

@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { signIn, useSession } from 'next-auth/react'
 import { FcGoogle } from 'react-icons/fc';
 import Cookies from 'js-cookie';
+
 import { useAuth } from '../../utils/AuthContext';
-import { signIn, useSession } from 'next-auth/react'
 
 const Login = () => {
   const [userData, setUserData] = useState({});
@@ -94,7 +95,7 @@ const Login = () => {
       Cookies.set('email', profile.email, { path: '/' });
       Cookies.set('role', profile.role, { path: '/' });
 
-      router.push('/torneos')
+      router.push('/torneos');
       setIsLoggedIn(true);
     } catch (error) {
       console.log(error);

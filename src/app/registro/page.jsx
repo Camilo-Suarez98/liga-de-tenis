@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
-import { useAuth } from '../../utils/AuthContext';
 import { signIn, useSession } from 'next-auth/react';
 import Cookies from 'js-cookie';
+
+import { useAuth } from '../../utils/AuthContext';
 
 const Register = () => {
   const [newUserData, setNewUserData] = useState({});
@@ -94,7 +95,7 @@ const Register = () => {
       Cookies.set('email', profile.email, { path: '/' });
       Cookies.set('role', profile.role, { path: '/' });
 
-      router.push('/torneos')
+      router.push('/torneos');
       setIsLoggedIn(true);
     } catch (error) {
       setErrorData(true);

@@ -1,11 +1,12 @@
-'use client'
+'use client';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+
 import Loader from './Loader';
 
 const TournamentsTable = () => {
   const [tournaments, setTournaments] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   async function getTournaments() {
     const tournamentResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournament`);
@@ -15,11 +16,11 @@ const TournamentsTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const tournamentsInfo = await getTournaments()
+        const tournamentsInfo = await getTournaments();
         setTournaments(tournamentsInfo.data);
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
-        throw new Error(error)
+        throw new Error(error);
       };
     };
 
@@ -27,7 +28,7 @@ const TournamentsTable = () => {
   }, []);
 
   if (loading) {
-    return <Loader />
+    return <Loader />;
   };
 
   return (

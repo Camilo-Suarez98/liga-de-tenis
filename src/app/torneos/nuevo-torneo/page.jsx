@@ -1,7 +1,8 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+
 import authenticatedRoute from '@/components/HOC/AuthenticatedRoute';
 
 const NewTournament = () => {

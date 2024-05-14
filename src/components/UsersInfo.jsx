@@ -1,10 +1,11 @@
-'use client'
-import React, { useState, useEffect } from 'react'
+'use client';
+import React, { useState, useEffect } from 'react';
+
 import Loader from './Loader';
 
 const UsersInfo = () => {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   async function getUsers() {
     const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`);
@@ -14,11 +15,11 @@ const UsersInfo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const usersInfo = await getUsers()
+        const usersInfo = await getUsers();
         setUsers(usersInfo?.data);
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
-        throw new Error(error)
+        throw new Error(error);
       };
     };
 
@@ -26,7 +27,7 @@ const UsersInfo = () => {
   }, []);
 
   if (loading) {
-    return <Loader />
+    return <Loader />;
   }
 
   return (
@@ -60,7 +61,7 @@ const UsersInfo = () => {
         )
       })}
     </div>
-  )
-}
+  );
+};
 
-export default UsersInfo
+export default UsersInfo;

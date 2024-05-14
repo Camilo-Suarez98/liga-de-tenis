@@ -1,12 +1,13 @@
-'use client'
+'use client';
 import Cookies from 'js-cookie';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
+
 import { useAuth } from '../utils/AuthContext';
 
 const Header = () => {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
-  const router = useRouter()
+  const router = useRouter();
 
   const handleLogOut = () => {
     Cookies.remove('token');
@@ -16,9 +17,9 @@ const Header = () => {
     Cookies.remove('role');
     Cookies.remove('isLoggedIn');
 
-    setIsLoggedIn(false)
-    router.push('/')
-  }
+    setIsLoggedIn(false);
+    router.push('/');
+  };
 
   return (
     <header className='h-16 flex justify-between items-center sm:px-6'>
@@ -54,7 +55,7 @@ const Header = () => {
         }
       </div>
     </header>
-  )
-}
+  );
+};
 
 export default Header;
